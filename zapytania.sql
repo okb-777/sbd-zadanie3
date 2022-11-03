@@ -30,10 +30,10 @@ SELECT * FROM `orders` WHERE customer_id IN( SELECT id FROM customers WHERE id B
 
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-SELECT * FROM `customers` JOIN orders ON customers.id=orders.customer_id;
-SELECT *, COUNT(orders.customer_id) FROM `customers` JOIN orders ON customers.id=orders.customer_id GROUP BY orders.customer_id;
+SELECT * FROM `customers` LEFT JOIN orders ON customers.id=orders.customer_id ORDER BY customers.id ASC;
+SELECT customers.id, customers.customer_name,COUNT(orders.customer_id) FROM `customers` LEFT JOIN orders ON customers.id=orders.customer_id GROUP BY orders.customer_id;
 SELECT DISTINCT customers.id, customers.customer_name, customers.contact_name, customers.address, customers.city, customers.post_code, customers.country FROM `customers` JOIN orders ON customers.id=orders.customer_id ORDER BY customers.id ASC;
-SELECT * FROM `employees` RIGHT JOIN orders ON orders.employee_id = employees.id ORDER BY orders.employee_id;
+SELECT employees.id, employees.last_name, employees.first_name, orders.id FROM `employees` RIGHT JOIN orders ON employees.id = orders.employee_id ORDER BY orders.employee_id;
 SELECT A.customer_name AS name1, B.customer_name AS name2, A.City FROM customers A, customers B WHERE A.id <> B.id AND A.city = B.city ORDER BY A.city;
 
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
