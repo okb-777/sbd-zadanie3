@@ -1,3 +1,6 @@
+#WHERE, AND, OR, ORDER BY
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
 SELECT * FROM `customers` WHERE country = "Germany";
 SELECT * FROM `customers` WHERE city = "Berlin";
 SELECT * FROM `customers` WHERE city = "Berlin" AND country = "Germany";
@@ -7,6 +10,7 @@ SELECT * FROM `customers` ORDER BY country ASC;
 SELECT * FROM `customers` ORDER BY country DESC;
 SELECT * FROM `customers` ORDER BY country DESC, customer_name ASC;
 
+#MIN, MAX, COUNT, AVG, SUM, GROUP BY    
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 SELECT MIN(price) FROM `products`;
@@ -18,6 +22,7 @@ SELECT COUNT(category_id), AVG(price) FROM `products` WHERE category_id=1;
 SELECT SUM(price) FROM `products` WHERE category_id=2;
 SELECT category_id, MAX(price) FROM `products` WHERE category_id=1 OR category_id=2 GROUP BY category_id;
 
+#BETWEEN, NOT BETWEEN, IN, NOT IN, SUBQUERY
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 SELECT * FROM `products` WHERE price BETWEEN 10 AND 20;
@@ -28,6 +33,7 @@ SELECT * FROM `products` WHERE (price BETWEEN 10 AND 15) AND (category_id NOT BE
 SELECT * FROM `orders` WHERE order_date BETWEEN CAST('19960701' as date) AND CAST('19960731' as date);
 SELECT * FROM `orders` WHERE customer_id IN( SELECT id FROM customers WHERE id BETWEEN 77 AND 90 );
 
+#JOIN, INNER JOIN, LEFT JOIN, RIGHT JOIN, Self Join
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 SELECT * FROM `customers` LEFT JOIN orders ON customers.id=orders.customer_id ORDER BY customers.id ASC;
@@ -38,3 +44,10 @@ SELECT A.customer_name AS name1, B.customer_name AS name2, A.City FROM customers
 
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
+#LIMIT, OFFSET
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+SELECT * FROM `orders` LIMIT 10 OFFSET 10;
+SELECT * FROM `orders` ORDER BY id DESC LIMIT 10;
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
