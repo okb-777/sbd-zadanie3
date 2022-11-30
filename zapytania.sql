@@ -75,7 +75,13 @@ SELECT * FROM `customers` ORDER BY (CASE WHEN city IS NULL THEN country ELSE cit
 
 SELECT products.id, products.name, SUM(orders_details.quantity) AS ilość FROM `products` JOIN orders_details ON products.id = orders_details.product_id GROUP BY(products.name) ORDER BY `ilość` DESC LIMIT 10;
 SELECT customers.id, customers.customer_name, COUNT(orders.customer_id) AS liczba_zamówień FROM `customers` JOIN orders ON customers.id = orders.customer_id GROUP BY (customers.customer_name) ORDER BY `liczba_zamówień` DESC LIMIT 10;
-SELECT categories.id, categories.category_name, COUNT(products.category_id) AS ilość FROM `categories` JOIN products ON categories.id = products.category_id GROUP BY categories.category_name ORDER BY ilość DESC LIMIT 1;
+SELECT categories.id, categories.category_name, COUNT(products.category_id) AS ilość FROM `categories` JOIN products ON categories.id = products.category_id JOIN orders_details ON products.id = orders_details.product_id GROUP BY categories.category_name ORDER BY ilość DESC LIMIT 1;
+SELECT categories.id, categories.category_name, COUNT(products.category_id) AS ilość FROM `categories` JOIN products ON categories.id = products.category_id JOIN orders_details ON products.id = orders_details.product_id GROUP BY categories.category_name ORDER BY id ASC;
+SELECT customers.customer_name, orders.order_date FROM customers JOIN orders ON customers.id = orders.customer_id WHERE orders.order_date > "1996-10-01";
 
-
+#DISTINCT
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+SELECT country FROM `customers`; #wypisuje kilka razy to samo panstwo tyle ile wystepuje w bazie
+SELECT DISTINCT country FROM `customers`; #wypisuje raz panstwo
+SELECT COUNT(DISTINCT country) FROM `customers`;
